@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
+        body{
+            overflow: hidden;
+        }
+        .heart-big{
+            position: relative;
+            width: 8rem;
+            height: 8rem;
+            background-color: red;
+            transform: rotate(-45deg);
+            &::before, &::after{
+                content: "";
+            position: absolute;
+            width: 8rem;
+            height: 8rem;
+            background-color: red;
+            border-radius: 50%;
+            }
+
+            &::before{
+                top: -4rem;
+                left: 0;
+            }
+
+            &::after{
+                left: 4rem;
+                top: 0;
+            }
+        }
+
+        .heart {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: floatUp 5s linear forwards;
+            bottom: -50vh;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-150vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        .container-fluid{
+            font-family: 'winky rough';
+            font-size: 3rem;
+
+            &::before, &::after{
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 100%;
+                top: -100%;
+                background-size: contain;
+                background-image: url('wave.svg');
+                background-repeat: repeat-x;
+                animation: bg-move 30s linear infinite;
+            }
+            &::before{
+                top: 50%;
+                bottom: -50%;
+                animation-direction: reverse;
+            }
+            &::after{
+                transform: rotate(180deg);
+                top: -50%;
+            }
+        }
+
+        @keyframes bg-move {
+            0%{
+                background-position: -100vw 0;
+            }
+            100%{
+                background-position: 100vw 0;
+            }
+        }
+
+        .click-me{
+            animation: wobble 2s alternate infinite;
+            transform-origin: center;
+        }
+
+        @keyframes wobble{
+            25%{
+                scale: 1.3;
+                transform: rotate(25deg);
+            }
+            50%{
+                scale: 1;
+                transform: rotate(0deg);
+            }
+            75%{
+                scale: 1.3;
+                transform: rotate(-25deg);
+            }
+        }
+    </style>
+
+</head>
+<body id="body" class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: #ff0000aa;">
+    
+    <div class="d-flex flex-column gap-4 justify-content-center align-items-center overflow-hidden container-fluid bg-warning-subtle rounded-4 position-absolute border border-danger border-4 " style="height: 80vh; width: 80vw;">
+        <div class="container d-flex justify-content-center align-items-center gap-5">
+            <div class="heart-big me-5"></div>
+            <p>HEY!!! GURLLLLL </p>
+            <div class="heart-big ms-5"></div>
+        </div>
+        <a href="letter.html">    
+            <button class="click-me btn btn-danger btn-lg" href="letter.html">Click ME!!</button>
+        </a>
+    </div>
+
+</body>
+
+<script>
+    body = document.getElementById("body")
+
+    function createHeart() {
+        const heart = document.createElement("div");
+            heart.classList.add("heart");
+
+            heart.style.left = (Math.random() * 2 - 1) * 50 + "vw";
+            heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+            body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+    }
+
+    setInterval(createHeart, 500);
+
+    
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</html>
